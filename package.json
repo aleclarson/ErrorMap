@@ -1,0 +1,17 @@
+{
+  "name": "ErrorMap",
+  "version": "1.0.0",
+  "map": "js/src/ErrorMap",
+  "dependencies": {
+    "type-utils": "aleclarson/type-utils#1.0.0",
+    "log": "aleclarson/log#1.0.0",
+    "in-array": "aleclarson/in-array#1.0.0",
+    "Type": "aleclarson/Type#1.0.0",
+    "getArgProp": "aleclarson/getArgProp#1.0.0"
+  },
+  "lotus": {
+    "plugins": [
+      "lotus-coffee"
+    ]
+  }
+}

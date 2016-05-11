@@ -1,0 +1,10 @@
+{
+  "version": 3,
+  "file": "ErrorMap.js",
+  "sourceRoot": "../../spec",
+  "sources": [
+    "ErrorMap.coffee"
+  ],
+  "names": [],
+  "mappings": ""
+}
