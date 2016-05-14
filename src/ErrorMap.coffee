@@ -1,50 +1,75 @@
 
-{ Shape } = require "type-utils"
-
+isConstructor = require "isConstructor"
 getArgProp = require "getArgProp"
 inArray = require "in-array"
+Shape = require "Shape"
 Type = require "Type"
 log = require "log"
 
 type = Type "ErrorMap"
 
-type.argumentTypes =
-  config: Shape "ErrorMap_Config", {
-    warn: Object.Maybe
-    quiet: Object.Maybe
-    printError: Function
-    printWarning: Function
-  }
+type.optionTypes =
+  warn: Array.Maybe
+  quiet: Array.Maybe
+  onError: Function
+  onWarning: Function
 
-type.argumentDefaults =
-  config: {
-    printError: (error, options) ->
-      options.format ?= getArgProp "message"
+type.optionDefaults =
+
+  onError: (error, options) ->
+    log.moat 1
+    if options.header
+      options.header()
+      log.moat 0
+    log.red "Error: "
+    log.white error.message
+    log.moat 1
+    if isDev
+      log.gray.dim error.stack.split(log.ln).slice(1).join(log.ln)
       log.moat 1
-      log.red "Error: "
-      log options.format error
+    return
+
+  onWarning: (error, options) ->
+    log.moat 1
+    if options.header
+      options.header()
+      log.moat 0
+    log.yellow "Warning: "
+    log.white error.message
+    log.moat 1
+    if isDev
+      log.gray.dim error.stack.split(log.ln).slice(1).join(log.ln)
       log.moat 1
-      return
-    printWarning: (error, options) ->
-      options.format ?= getArgProp "message"
-      log.moat 1
-      log.yellow "Warning: "
-      log options.format error
-      log.moat 1
-      return
-  }
+    return
 
 type.defineValues
 
-  _config: getArgProp()
+  _warn: getArgProp "warn"
+
+  _quiet: getArgProp "quiet"
+
+  _onError: getArgProp "onError"
+
+  _onWarning: getArgProp "onWarning"
 
 type.defineMethods
 
-  resolve: (error, options = {}) ->
-    return if inArray @_config.quiet, error.message
-    if inArray @_config.warn, error.message
-      @_config.printWarning error, options
-    else @_config.printError error, options
+  resolve: (error, options) ->
+
+    if isConstructor options, Function
+      options = { header: options }
+    else options ?= {}
+
+    if inArray @_quiet, error.message
+      error.catch?()
+      return
+
+    if inArray @_warn, error.message
+      error.catch?()
+      @_onWarning error, options
+      return
+
+    @_onError error, options
     return
 
 module.exports = type.build()
