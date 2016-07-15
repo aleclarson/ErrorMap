@@ -1,7 +1,7 @@
 {
   "name": "ErrorMap",
   "version": "1.0.0",
-  "main": "js/src/ErrorMap",
+  "main": "js/ErrorMap",
   "dependencies": {
     "Shape": "aleclarson/Shape#1.0.0",
     "Type": "aleclarson/Type#1.0.0",

@@ -1,8 +1,8 @@
-var Shape, Type, getArgProp, inArray, isConstructor, log, type;
+var Shape, Type, fromArgs, inArray, isConstructor, log, type;
 
 isConstructor = require("isConstructor");
 
-getArgProp = require("getArgProp");
+fromArgs = require("fromArgs");
 
 inArray = require("in-array");
 
@@ -53,10 +53,10 @@ type.optionDefaults = {
 };
 
 type.defineValues({
-  _warn: getArgProp("warn"),
-  _quiet: getArgProp("quiet"),
-  _onError: getArgProp("onError"),
-  _onWarning: getArgProp("onWarning")
+  _warn: fromArgs("warn"),
+  _quiet: fromArgs("quiet"),
+  _onError: fromArgs("onError"),
+  _onWarning: fromArgs("onWarning")
 });
 
 type.defineMethods({
@@ -89,4 +89,4 @@ type.defineMethods({
 
 module.exports = type.build();
 
-//# sourceMappingURL=../../map/src/ErrorMap.map
+//# sourceMappingURL=map/ErrorMap.map
