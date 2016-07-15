@@ -1,6 +1,6 @@
 
 isConstructor = require "isConstructor"
-getArgProp = require "getArgProp"
+fromArgs = require "fromArgs"
 inArray = require "in-array"
 Shape = require "Shape"
 Type = require "Type"
@@ -44,13 +44,13 @@ type.optionDefaults =
 
 type.defineValues
 
-  _warn: getArgProp "warn"
+  _warn: fromArgs "warn"
 
-  _quiet: getArgProp "quiet"
+  _quiet: fromArgs "quiet"
 
-  _onError: getArgProp "onError"
+  _onError: fromArgs "onError"
 
-  _onWarning: getArgProp "onWarning"
+  _onWarning: fromArgs "onWarning"
 
 type.defineMethods
 
