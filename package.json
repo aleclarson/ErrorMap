@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "main": "js/ErrorMap",
   "dependencies": {
-    "Shape": "aleclarson/Shape#1.0.0",
     "Type": "aleclarson/Type#1.1.0",
     "fromArgs": "aleclarson/fromArgs#1.0.0",
     "in-array": "aleclarson/in-array#1.0.0",
